@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _sitDownSpeed = 15f;
     [SerializeField] private Transform _pointerTransform;
+    [SerializeField] private Transform _body;
     [SerializeField] private float _rotationSpeed = 2f;
 
     private float _horizontalInput;
@@ -34,6 +33,16 @@ public class PlayerMove : MonoBehaviour
         {
             _rigidbody.AddForce(0f,_jumpSpeed, 0f, ForceMode.VelocityChange);
         }
+
+        if (_pointerTransform.localRotation.y > 0f)
+        {
+            _body.localRotation = Quaternion.Lerp(_body.localRotation,Quaternion.Euler(0f, -45f,0f), Time.deltaTime * _rotationSpeed);
+        }
+        else
+        {
+            _body.localRotation = Quaternion.Lerp(_body.localRotation,Quaternion.Euler(0f, 45f,0f), Time.deltaTime * _rotationSpeed);
+        }
+        
     }
 
 
@@ -61,16 +70,6 @@ public class PlayerMove : MonoBehaviour
         {
             _rigidbody.AddForce(-_rigidbody.velocity.x * _friction, 0f, 0f, ForceMode.VelocityChange);
         }
-
-        if (_pointerTransform.localRotation.y < 0f)
-        {
-            _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, Quaternion.Euler(0f, 45f, 0f), Time.fixedDeltaTime * _rotationSpeed);
-        }
-        else
-        {
-            _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, Quaternion.Euler(0f, -45f, 0f), Time.fixedDeltaTime * _rotationSpeed);
-        }
-        
     }
 
 
@@ -80,8 +79,6 @@ public class PlayerMove : MonoBehaviour
 
         for (int i = 0; i < collisionInfo.contactCount; i++)
         {
-            Debug.Log(angle);
-        
             if (angle < 45f)
             {
                 _grounded = true;
