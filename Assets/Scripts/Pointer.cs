@@ -5,11 +5,11 @@ public class Pointer : MonoBehaviour
     [SerializeField] private Transform _aimTransform;
     [SerializeField] private Camera _playerCamera;
     
-    private void Update()
+    private void LateUpdate()
     {
         Ray ray = _playerCamera.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction);
-        Plane plane = new Plane(-Vector3.forward, Vector3.zero);
+        Plane plane = new Plane(Vector3.back, Vector3.zero);
         plane.Raycast(ray, out float distance);
         Vector3 point = ray.GetPoint(distance);
 
