@@ -1419,6 +1419,7 @@ MonoBehaviour:
   _maxSpeed: 5
   _sitDownSpeed: 15
   _pointerTransform: {fileID: 518831334}
+  _body: {fileID: 771822159}
   _rotationSpeed: 3
 --- !u!54 &1557725675
 Rigidbody:
