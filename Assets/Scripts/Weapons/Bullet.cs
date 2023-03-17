@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject _effectPrefab;
+    [field: SerializeField] public int Damage { get; private set; }
 
     private void Start()
     {

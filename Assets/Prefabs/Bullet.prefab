@@ -270,3 +270,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectPrefab: {fileID: 1602197966606650, guid: 4b544903a9f8c4dca8d0ebd266badf54,
     type: 3}
+  <Damage>k__BackingField: 1

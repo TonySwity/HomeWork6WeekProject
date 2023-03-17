@@ -53,16 +53,18 @@ public class PlayerMove : MonoBehaviour
         if (!_grounded)
         {
             speedMultiplier = 0.2f;
+            
+            if (_rigidbody.velocity.x > _maxSpeed && _horizontalInput > 0f)
+            {
+                speedMultiplier = 0f;
+            }
+            else if (_rigidbody.velocity.x < -_maxSpeed && _horizontalInput < 0f)
+            {
+                speedMultiplier = 0f;
+            }
         }
 
-        if (_rigidbody.velocity.x > _maxSpeed && _horizontalInput > 0f)
-        {
-            speedMultiplier = 0f;
-        }
-        else if (_rigidbody.velocity.x < -_maxSpeed && _horizontalInput < 0f)
-        {
-            speedMultiplier = 0f;
-        }
+
         
         _rigidbody.AddForce(_moveSpeed * _horizontalInput * speedMultiplier, 0f, 0f, ForceMode.VelocityChange);
         
