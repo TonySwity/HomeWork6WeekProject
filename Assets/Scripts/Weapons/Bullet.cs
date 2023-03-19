@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -12,6 +13,12 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
+    {
+        Instantiate(_effectPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         Instantiate(_effectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
