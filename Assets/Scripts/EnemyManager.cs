@@ -1,14 +1,16 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private Enemy[] _enemies;
-    private PlayerHealth _player;
+    [SerializeField]private List<Enemy> _enemies;
+    [SerializeField]private PlayerHealth _player;
 
     private void Start()
     {
         _player = FindObjectOfType<PlayerHealth>();
-        _enemies = FindObjectsOfType<Enemy>();
+        _enemies = FindObjectsOfType<Enemy>().ToList();
 
         foreach (var enemy in _enemies)
         {
@@ -16,14 +18,30 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update()   
     {
-        foreach (var enemy in _enemies)
+        if (_enemies.Count > 0)
         {
-            if (Vector3.Distance(enemy.transform.position,_player.transform.position) == 50f)
+            for (int i = 0; i < _enemies.Count; i++)
             {
-                enemy.gameObject.SetActive(true);
+                if (i >= _enemies.Count)
+                {
+                    i = 0;
+                }
+                
+                if (Vector3.Distance(_enemies[i].transform.position,_player.transform.position) <= 20f)
+                {
+                    if (_enemies[i].gameObject.activeSelf == false)
+                    {
+                        _enemies[i].gameObject.SetActive(true);
+                        _enemies.RemoveAt(i);
+                    }
+                }
             }
+        }
+        else
+        {
+            Debug.Log("Беда Враги закончились");
         }
     }
 }
