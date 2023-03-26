@@ -7,8 +7,11 @@ public class LootHeal : MonoBehaviour
     {
         if (other.attachedRigidbody.TryGetComponent(out PlayerHealth playerHealth))
         {
-            playerHealth.AddHealth(_health);
-            Die();
+            if (playerHealth.Health < playerHealth.MaxHealth)
+            {
+                playerHealth.AddHealth(_health);
+                Die();
+            }
         }
     }
 

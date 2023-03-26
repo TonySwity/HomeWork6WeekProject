@@ -11,11 +11,10 @@ public class TakeDamageOnCollision : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
             _enemyHealth.TakeDamage(bullet.Damage);
-            
         }
         if (_dieOnAnyCollision == true)
         {
-            _enemyHealth.TakeDamage(1000);
+            _enemyHealth.Die();
         }
     }
 }

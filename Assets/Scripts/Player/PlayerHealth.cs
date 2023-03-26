@@ -6,9 +6,9 @@ using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int _health = 5;
-    [SerializeField] private int _maxHealth = 8;
-    [SerializeField] private float _invulnerableInSeconds = 1f;
+    [field: SerializeField] public int Health { get; private set; } = 5;
+    [field: SerializeField] public int MaxHealth { get; private set; } = 8;
+    [field: SerializeField] public float InvulnerableInSeconds { get; private set; } = 1f;
     //[SerializeField] private AudioSource _takeDamageSound;
     //[SerializeField] private AudioSource _addHealthSound;
     [SerializeField] private HealthUI _healthUI;
@@ -22,25 +22,25 @@ public class PlayerHealth : MonoBehaviour
     
     private void Start()
     {
-        _healthUI.Setup(_maxHealth);
-        _healthUI.DisplayHealth(_health);
+        _healthUI.Setup(MaxHealth);
+        _healthUI.DisplayHealth(Health);
     }
 
     public void TakeDamage(int damage)
     {
         if (_invulnerable == false)
         {
-            _health -= damage;
+            Health -= damage;
 
-            if (_health <= 0)
+            if (Health <= 0)
             {
-                _health = 0;
+                Health = 0;
                 Die();
             }
             _invulnerable = true;
-            Invoke(nameof(StopInvulnerable), _invulnerableInSeconds);
+            Invoke(nameof(StopInvulnerable), InvulnerableInSeconds);
             //_takeDamageSound.Play();
-            _healthUI.DisplayHealth(_health);
+            _healthUI.DisplayHealth(Health);
             //_damageScreen.StartEffect();
             //_blink.StartBlink(); 
             EventOnTakeDamage?.Invoke();
@@ -49,14 +49,14 @@ public class PlayerHealth : MonoBehaviour
 
     public void AddHealth(int health)
     {
-        _health += health;
+        Health += health;
 
-        if (_health >= _maxHealth)
+        if (Health >= MaxHealth)
         {
-            _health = _maxHealth;
+            Health = MaxHealth;
         }
         EventOnAddHealth?.Invoke();
-        _healthUI.DisplayHealth(_health);
+        _healthUI.DisplayHealth(Health);
     }
 
     private void StopInvulnerable()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Carrot : MonoBehaviour
@@ -7,9 +8,14 @@ public class Carrot : MonoBehaviour
     private Transform _playerTransform;
     private Vector3 _toPlayerDirection;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        transform.rotation = Quaternion.identity;
         _playerTransform = FindObjectOfType<PlayerMove>().transform;
         _toPlayerDirection = (_playerTransform.position - transform.position).normalized;
         _rigidbody.velocity = _toPlayerDirection * _speed;

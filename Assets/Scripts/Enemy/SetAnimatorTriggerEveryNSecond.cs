@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public class Rabbit : MonoBehaviour
+public class SetAnimatorTriggerEveryNSecond : MonoBehaviour
 {
-    [SerializeField] private float _attackPeriod = 3f;
+    [FormerlySerializedAs("_attackPeriod")]
+    [SerializeField] private float _period = 3f;
     [SerializeField] private Animator _animator;
+    [SerializeField] private string _triggerName = "Attack";
+
     private float _timer;
     
     public UnityEvent EventOnAttack;
@@ -12,11 +16,11 @@ public class Rabbit : MonoBehaviour
     {
         _timer += Time.deltaTime;
         
-        if (_timer > _attackPeriod)
+        if (_timer > _period)
         {
             _timer = 0f;
             
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger(_triggerName);
             EventOnAttack?.Invoke();
         }
     }

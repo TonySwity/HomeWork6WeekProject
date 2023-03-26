@@ -15,11 +15,14 @@ public class EnemyHealth : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            EventOnTakeDamage?.Invoke();
+        }
         
-        EventOnTakeDamage?.Invoke();
     }
 
-    private void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }

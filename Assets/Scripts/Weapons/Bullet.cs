@@ -13,12 +13,12 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
-        Instantiate(_effectPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+    { 
+        HitTarget();
     }
+    
 
-    private void OnTriggerEnter(Collider other)
+    public void HitTarget()
     {
         Instantiate(_effectPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
