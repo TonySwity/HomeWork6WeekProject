@@ -8,6 +8,6 @@ public class ObjectAttackCreator : MonoBehaviour
 
     public void Attack()
     {
-        Instantiate(_objectPrefab, new Vector3(_spawn.position.x, _spawn.position.y, 0f), _spawn.rotation);
+        Instantiate(_objectPrefab, new Vector3(_spawn.position.x, _spawn.position.y, 0f), Quaternion.identity);
     }
 }
