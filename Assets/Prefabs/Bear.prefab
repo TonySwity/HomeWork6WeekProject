@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 8911525717412977576}
   - component: {fileID: 8911525717412977583}
   - component: {fileID: 8911525717412977578}
-  - component: {fileID: 8911525717412977572}
   - component: {fileID: 8911525717412977579}
   - component: {fileID: 8911525717412977573}
   - component: {fileID: 8911525717412977574}
@@ -118,26 +117,6 @@ MonoBehaviour:
   - {fileID: 2355050085189353389}
   - {fileID: 7566504068083058369}
   - {fileID: 5312281610581642411}
---- !u!95 &8911525717412977572
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8911525717412977582}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 185dd3a15e28e400a9cc50abad2b6b94, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8911525717412977579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,10 +157,10 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Damage
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8911525717412977572}
+      - m_Target: {fileID: 2578714151261219787}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5
@@ -206,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _period: 5
-  _animator: {fileID: 8911525717412977572}
+  _animator: {fileID: 2578714151261219787}
   _triggerName: Attack
   EventOnAttack:
     m_PersistentCalls:
@@ -235,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b46a30bccd4c46a1b981926239d6208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distanceToActivate: 20
 --- !u!1 &8911525718276759236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1010,47 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 8911525717780313675}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8605658420747471642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5bf9abf8a9fc84ef99c43d7310c50b16,
+    type: 3}
+  m_PrefabInstance: {fileID: 8911525717780313675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2578714151261219787
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8605658420747471642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 185dd3a15e28e400a9cc50abad2b6b94, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5940176200132123151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8605658420747471642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cedd7abe88e4664a9fec623dab6c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectPrefab: {fileID: 1553909007676059858, guid: 783eb626e6849415086e26eb66f8d11d,
+    type: 3}
+  _spawn: {fileID: 8911525717390221738}
 --- !u!23 &8758420052973211310 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9070194886070896411, guid: 5bf9abf8a9fc84ef99c43d7310c50b16,
