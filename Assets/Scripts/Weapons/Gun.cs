@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Transform _shootPoint;
-    [SerializeField] private float _BulletSpeed = 10f;
+    [SerializeField] private float _bulletSpeed = 10f;
     [SerializeField] private float _shootPeriod = 0.2f;
     [SerializeField] private AudioSource _shotSound;
     [SerializeField] private GameObject _flash;
@@ -39,7 +38,7 @@ public class Gun : MonoBehaviour
     public virtual void Shoot()
     {
         Bullet newBullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
-        newBullet.GetComponent<Rigidbody>().velocity = _shootPoint.forward * _BulletSpeed;
+        newBullet.GetComponent<Rigidbody>().velocity = _shootPoint.forward * _bulletSpeed;
         _shotSound.pitch = Random.Range(0.8f, 1.2f);
         _shotSound.Play();
         if (_shootEffect != null)
