@@ -15,6 +15,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 2f;
 
     private float _horizontalInput;
+    private int _jumpFrameCounter;
+
+    public bool Grounded => _grounded;
 
     private void Update()
     {
@@ -31,7 +34,7 @@ public class PlayerMove : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && _grounded)
         {
-            _rigidbody.AddForce(0f,_jumpSpeed, 0f, ForceMode.VelocityChange);
+            Jump();
         }
 
         if (_pointerTransform.localRotation.y > 0f)
@@ -43,6 +46,19 @@ public class PlayerMove : MonoBehaviour
             _body.localRotation = Quaternion.Lerp(_body.localRotation,Quaternion.Euler(0f, 45f,0f), Time.deltaTime * _rotationSpeed);
         }
         
+    }
+
+    public void Jump()
+    {
+        _rigidbody.AddForce(0f,_jumpSpeed, 0f, ForceMode.VelocityChange);
+        _jumpFrameCounter = 0;
+
+    }
+
+    private void JumpRotate()
+    {
+        _rigidbody.freezeRotation = false;
+        _rigidbody.AddRelativeTorque(0f,0f, 7f, ForceMode.VelocityChange);
     }
 
 
@@ -63,15 +79,22 @@ public class PlayerMove : MonoBehaviour
                 speedMultiplier = 0f;
             }
         }
-
-
         
         _rigidbody.AddForce(_moveSpeed * _horizontalInput * speedMultiplier, 0f, 0f, ForceMode.VelocityChange);
         
         if (_grounded)
         {
             _rigidbody.AddForce(-_rigidbody.velocity.x * _friction, 0f, 0f, ForceMode.VelocityChange);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, Time.deltaTime * 15f);
         }
+
+        _jumpFrameCounter += 1;
+
+        if (_jumpFrameCounter == 3)
+        {
+            JumpRotate();
+        }
+
     }
 
 
@@ -84,6 +107,7 @@ public class PlayerMove : MonoBehaviour
             if (angle < 45f)
             {
                 _grounded = true;
+                _rigidbody.freezeRotation = true;
             }
         }
     }

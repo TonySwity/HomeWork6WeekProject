@@ -6,7 +6,15 @@ public class SoundManager : MonoBehaviour
     
     public void SetMusicEnable(bool value)
     {
-        _music.enabled = value;
+        if (value)
+        {
+            _music.Play();
+        }
+        else
+        {
+            _music.Pause();
+        }
+        
     }
 
     public void SetVolume(float value)

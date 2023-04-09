@@ -16,11 +16,11 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             Time.timeScale = _timeScale;
         }
-        else
+        else  if (Input.GetMouseButtonUp(1))
         {
             Time.timeScale = 1f;
         }

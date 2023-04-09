@@ -11,7 +11,8 @@ public class Gun : MonoBehaviour
     [SerializeField] private float _shootPeriod = 0.2f;
     [SerializeField] private AudioSource _shotSound;
     [SerializeField] private GameObject _flash;
-    [SerializeField] private float _flashTime = 0.12f;
+    [SerializeField] private float _flashTime = 0.02f;
+    [SerializeField] private ParticleSystem _shootEffect;
 
     private float _timer;
 
@@ -41,7 +42,11 @@ public class Gun : MonoBehaviour
         newBullet.GetComponent<Rigidbody>().velocity = _shootPoint.forward * _BulletSpeed;
         _shotSound.pitch = Random.Range(0.8f, 1.2f);
         _shotSound.Play();
-
+        if (_shootEffect != null)
+        {
+            _shootEffect.Play();
+        }
+        
         StartCoroutine(HideFlash());
     }
 
@@ -54,6 +59,7 @@ public class Gun : MonoBehaviour
 
     public virtual void Activate()
     {
+        _flash.SetActive(false);
         gameObject.SetActive(true);
     }
 

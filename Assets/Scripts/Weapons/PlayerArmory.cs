@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerArmory : MonoBehaviour
@@ -33,8 +29,11 @@ public class PlayerArmory : MonoBehaviour
 
     public void AddBullets(int gunIndex, int numberOfBullets)   
     {
-        _guns[gunIndex].AddBullets(numberOfBullets);
-        TakeGunInBox(gunIndex);
+        if (numberOfBullets > 0)
+        {
+            _guns[gunIndex].AddBullets(numberOfBullets);
+            TakeGunInBox(gunIndex);
+        }
     }
     
 }
